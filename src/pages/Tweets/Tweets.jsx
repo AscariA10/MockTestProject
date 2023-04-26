@@ -10,7 +10,11 @@ export const Tweets = () => {
    const [currentPage, setCurrentPage] = useState(1);
 
    useEffect(() => {
-      getUsers(currentPage).then(response => setUsers([...users, ...response]));
+      getUsers(currentPage).then(response =>
+         setUsers(prevState => {
+            return [...prevState, ...response];
+         })
+      );
    }, [currentPage]);
    console.log('currentPage', currentPage);
 
