@@ -4,11 +4,16 @@ import { NavLink } from 'react-router-dom';
 export const SharedLayout = () => {
    return (
       <>
-         <h1>Hello</h1>
-         <NavLink to="/">Home</NavLink>
-         <NavLink to="tweets">Tweets</NavLink>
-
-         <Outlet />
+         <header>
+            <nav>
+               <NavLink to="/">Home</NavLink>
+               <NavLink to="tweets">Tweets</NavLink>
+            </nav>
+         </header>
+         <main>
+            <Outlet />
+         </main>
+         <footer>created by WK</footer>
       </>
    );
 };
