@@ -6,8 +6,19 @@ import { getUsers } from 'api/apiFunctions';
 import { Gallery } from './Tweets.styled';
 
 export const Tweets = () => {
+   const [currentPage, setCurrentPage] = useState();
    const [users, setUsers] = useState([]);
-   const [currentPage, setCurrentPage] = useState(1);
+   const [myFollowingsUsers, setMyFollowingsUsers] = useState([]);
+
+   // const myFollowings = [];
+
+   useEffect(() => {
+      localStorage.setItem('myFollowings', JSON.stringify(myFollowingsUsers));
+   }, [myFollowingsUsers.length, myFollowingsUsers]);
+
+   useEffect(() => {
+      setCurrentPage(1);
+   }, []);
 
    useEffect(() => {
       getUsers(currentPage).then(response =>
@@ -16,7 +27,11 @@ export const Tweets = () => {
          })
       );
    }, [currentPage]);
-   console.log('currentPage', currentPage);
+
+   function addFollowedUser(userId) {
+      setMyFollowingsUsers([...myFollowingsUsers, userId]);
+      console.log(userId);
+   }
 
    function incrementPage() {
       setCurrentPage(currentPage + 1);
@@ -27,7 +42,7 @@ export const Tweets = () => {
          <button type="button">Back</button>
          <Gallery>
             {users?.map(element => {
-               return <Tweet key={element.id} props={element} />;
+               return <Tweet key={element.id} props={element} addFollowedUser={addFollowedUser} />;
             })}
          </Gallery>
          <button type="button" onClick={incrementPage}>

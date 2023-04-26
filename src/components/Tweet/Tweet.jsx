@@ -14,13 +14,14 @@ import {
 import cardImage from 'images/card-image.png';
 import logo from 'images/Logo.svg';
 
-export const Tweet = ({ props }) => {
-   const { avatar, tweets, followers } = props;
+export const Tweet = ({ props, addFollowedUser }) => {
+   const { avatar, tweets, followers, id } = props;
 
    const [follow, setFollow] = useState(false);
 
    const handleClick = () => {
       setFollow(!follow);
+      addFollowedUser(id);
    };
 
    return (
