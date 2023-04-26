@@ -6,13 +6,17 @@ import { getUsers } from 'api/apiFunctions';
 import { Gallery } from './Tweets.styled';
 
 export const Tweets = () => {
-   const [users, setUsers] = useState();
+   const [users, setUsers] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
 
    useEffect(() => {
-      getUsers().then(response => setUsers(response));
-   }, []);
-   console.log('users', users);
+      getUsers(currentPage).then(response => setUsers([...users, ...response]));
+   }, [currentPage]);
+   console.log('currentPage', currentPage);
 
+   function incrementPage() {
+      setCurrentPage(currentPage + 1);
+   }
    return (
       <>
          <h1>TweetsPage</h1>
@@ -22,6 +26,9 @@ export const Tweets = () => {
                return <Tweet key={element.id} props={element} />;
             })}
          </Gallery>
+         <button type="button" onClick={incrementPage}>
+            Load More
+         </button>
       </>
    );
 };

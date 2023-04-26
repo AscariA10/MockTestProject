@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
    Card,
    LogoImage,
@@ -14,6 +16,13 @@ import logo from 'images/Logo.svg';
 
 export const Tweet = ({ props }) => {
    const { avatar, tweets, followers } = props;
+
+   const [follow, setFollow] = useState(false);
+
+   const handleClick = () => {
+      setFollow(!follow);
+   };
+
    return (
       <Card>
          <LogoImage src={logo} alt="logo" />
@@ -29,7 +38,13 @@ export const Tweet = ({ props }) => {
          <FollowersCounter>
             {followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} FOLLOWERS
          </FollowersCounter>
-         <Button type="button">FOLLOW</Button>
+         <Button
+            type="button"
+            onClick={handleClick}
+            style={{ backgroundColor: follow ? 'rgb(92, 211, 168)' : 'rgba(235, 216, 255, 1)' }}
+         >
+            {follow ? 'FOLLOWING' : 'FOLLOW'}
+         </Button>
       </Card>
    );
 };

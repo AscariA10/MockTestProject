@@ -68,11 +68,13 @@ export const FollowersCounter = styled.p`
 export const Button = styled.button`
    box-sizing: border-box;
    width: 196px;
-   padding: 14px 56px;
+   padding-top: 14px;
+   padding-bottom: 14px;
    border-radius: 11px;
    box-shadow: 0px 3.4369285106658936px 3.4369285106658936px 0px rgba(0, 0, 0, 0.25);
    border: none;
 
    font-size: 18px;
    line-height: 1.2;
+   text-align: center;
 `;
